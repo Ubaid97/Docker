@@ -44,3 +44,12 @@ start, and will need to be pulled again
 ### Copying files from localhost to docker container
 - Run this command in local machines:
 ```docker cp filepath/filename container_id:/filepath```
+
+### Pushing container to Docker hub
+- Once the image is up and running, you can add it to your docker hub so 
+that it can be accessed globally
+- Commit the image: ```docker commit container_id docker_repo_name```
+- Push: ```docker push docker_repo_name:tagname```
+- Run ```docker images``` to check that the new image has been created
+- You might need to run ```docker login``` before pushing to authorise 
+access
