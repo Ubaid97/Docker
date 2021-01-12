@@ -38,7 +38,8 @@ start, and will need to be pulled again
 ### Logging into a container
 - On windows, before logging in, run ```alias docker="winpty docker"```
 - To log into a container, use the following command:
-```docker exec -it container_id bash```
+```docker exec -it container_id bash``` (-it stands for interactive 
+shell)
 - Once logged in, you can then make changes to the container
 
 ### Copying files from localhost to docker container
