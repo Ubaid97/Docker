@@ -56,3 +56,74 @@ that it can be accessed globally
 access
 - Finally, run the new image from your docker hub repo:
 - ```docker run -d -p port:port docker_repo_name```
+
+### Building a docker image
+- To build a docker image we need to create a Dockerfile (naming 
+convention - Dockerfile)
+- We use a Dockerfile to automate the tasks in an image/container
+- Information required in a Dockerfile depends on client demands
+- We need to know the dependencies required to run the app/db etc
+- Wrap up all the dependencies in the Dockerfile and execution commands
+
+### Dockerfile syntax
+- ```FROM``` - tells docker which base image to use in building image 
+(eg nginx)
+- ```LABEL MAINTAINER=umuhammad@spartaglobal.com```
+- ```COPY``` - copies files/folders from localhost to container
+- ```EXPOSE``` - default port
+- ```CMD``` - execution command
+- After having completed the Dockerfile, run the following cpmmand to 
+build image:
+- ```docker build -t docker_repo_name .```
+- To run image on browser: ```docker run -d -p port:port 
+docker_repo_name```
+
+### Containerise node app
+- Create a new directory with a new Dockerfile, and copy app folder into 
+directory
+- In the Dockerfile, specify the official node image as base image, and 
+add label:
+```docker
+# using official image of node as base image
+FROM node
+
+LABEL MAINTAINER=umuhammad@spartaglobal.com
+```
+- Create a new directory to hold the app and its dependencies:
+```docker
+WORKDIR /usr/src/app
+```
+- Copy the app folder from localost to the directory in image which will 
+hold app:
+```docker
+COPY app ./
+```
+- Run the command ```npm install``` to install modules needed to run the 
+app, and specify a port for launch:
+```docker
+RUN npm install
+
+# launch on port 3000
+EXPOSE 3000
+```
+- Execute the following command to run app:
+```docker
+CMD ["node", "app.js"]
+```
+- Dockerfile should look like this:
+```docker
+FROM node
+
+LABEL MAINTAINER=umuhammad@spartaglobal.com
+
+WORKDIR /usr/src/app
+
+COPY app ./
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+```
+- Commit and push imagge to docker repo
