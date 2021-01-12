@@ -53,3 +53,5 @@ that it can be accessed globally
 - Run ```docker images``` to check that the new image has been created
 - You might need to run ```docker login``` before pushing to authorise 
 access
+- Finally, run the new image from your docker hub repo:
+- ```docker run -d -p port:port docker_repo_name```
