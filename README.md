@@ -1,4 +1,10 @@
 # Containerization with Docker
+## What is containerization
+- Containerization is the process of packaging an application along with 
+its required libraries, frameworks, and configuration files together so 
+that it can be run in various computing environments efficiently
+- The encapsulation of an application and its required environment
+
 ## What is Docker
 - Docker is an open soure platform **docker hub documentation**
 - It helps and enables us to seperate applications from the 
@@ -8,6 +14,13 @@ infrastructure
 
 ## Why Docker
 - Big companies are using Docker - Ebay, Netflix, Sky etc.
+- does away with the need to replicate local environment on each 
+machine, saving time and effort
+- devops-friendly: Containerization packages the application along with 
+its environmental dependencies, which ensures that an application 
+developed in one envvironment works in another. Helps developers and 
+testers work collaboratively on the application
+
 
 ## Difference between VM and Docker
 - Docker is lightweight and user-friendly
@@ -15,6 +28,14 @@ infrastructure
 - Docker engine connects the container with OS and only uses the 
 resources required
 - VM works with Hypervisor to connect guest OS/VM with Host OS/server
+- A VM emulates an entire OS inside the host OS and requires a fixed 
+allocation that goes into running all the processes of an OS. This leads 
+to unnecessary wastage of computing resources due to large overhead
+- Setting up a VM takes time, as does the process of setting up a 
+particular application in each and every VM. Results in significant 
+amount of time and effort spent in just setting up the environment
+- Containerization circumvents these problems by packaging all the 
+required dependencies in a portable image file along with the software
 
 ## Demand and future of Docker
 ## Docker API
@@ -127,6 +148,32 @@ EXPOSE 3000
 CMD ["node", "app.js"]
 ```
 - Commit and push imagge to docker repo
+
+### Multi-stage layers
+- The following code is used for multi-stage layering:
+```docker
+# Creating micro services for nodejs front-end using docker
+FROM node as APP
+
+WORKDIR /usr/src/app
+
+COPY app ./
+
+RUN npm install
+
+FROM node:alpine
+
+# building a multi-stage layer
+# main line of code for multi-stage
+COPY --from=app /usr/src/app /usr/src/app
+
+WORKDIR /usr/src/app
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+
+```
 
 ## Microservices vs Monolithic architecture
 ### Monolithic
