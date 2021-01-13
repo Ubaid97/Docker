@@ -42,4 +42,7 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
+RUN node seeds/seed.js
+
 CMD ["node", "app.js"]
+# CMD ["node", "seed.js"]

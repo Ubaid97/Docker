@@ -219,3 +219,35 @@ to isolate as only the module in question needs to inspected
 - smaller and faster deployments because each service can be scaled and 
 deployed independently of the others, instead of having to deploy and 
 scale the entire app at once
+
+## Docker Compose
+- To connect the frontend with a db, use a docker-compose.yml file:
+```yml
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongodb-data:/db_container/environment/db
+    expose:
+      - "27017"
+    ports:
+      - 27017:27017
+
+  nodeapp:
+    image: "ubaidm97/eng74-nodeapp-prod"
+    container_name: nodeapp
+    environment:
+      - DB_HOST=mongodb
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb-data:
+```
+- This file allows you to run both the app and db containers together 
+and connect them
+- Run ```docker-compose up```

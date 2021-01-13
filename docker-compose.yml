@@ -1,0 +1,24 @@
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongodb-data:/db_container/environment/db
+    expose:
+      - "27017"
+    ports:
+      - 27017:27017
+
+  nodeapp:
+    image: "ubaidm97/eng74-nodeapp-prod"
+    container_name: nodeapp
+    environment:
+      - DB_HOST=mongodb
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb-data:
