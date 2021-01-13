@@ -104,35 +104,35 @@ docker_repo_name```
 directory
 - In the Dockerfile, specify the official node image as base image, and 
 add label:
-```docker
+```GO
 # using official image of node as base image
 FROM node
 
 LABEL MAINTAINER=umuhammad@spartaglobal.com
 ```
 - Create a new directory to hold the app and its dependencies:
-```docker
+```GO
 WORKDIR /usr/src/app
 ```
 - Copy the app folder from localost to the directory in image which will 
 hold app:
-```docker
+```GO
 COPY app ./
 ```
 - Run the command ```npm install``` to install modules needed to run the 
 app, and specify a port for launch:
-```docker
+```GO
 RUN npm install
 
 # launch on port 3000
 EXPOSE 3000
 ```
 - Execute the following command to run app:
-```docker
+```GO
 CMD ["node", "app.js"]
 ```
 - Dockerfile should look like this:
-```docker
+```GO
 FROM node
 
 LABEL MAINTAINER=umuhammad@spartaglobal.com
@@ -151,7 +151,7 @@ CMD ["node", "app.js"]
 
 ### Multi-stage layers
 - The following code is used for multi-stage layering:
-```docker
+```GO
 # Creating micro services for nodejs front-end using docker
 FROM node as APP
 
