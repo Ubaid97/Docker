@@ -127,3 +127,48 @@ EXPOSE 3000
 CMD ["node", "app.js"]
 ```
 - Commit and push imagge to docker repo
+
+## Microservices vs Monolithic architecture
+### Monolithic
+- In a monolithin architecture, the whole application, including 
+dependencies, are built on a single system with a single executable 
+binary for deployment
+- There are some advantages to using monolithic
+- Less operational overheads: avoids additional costs stemming from 
+interservice communication, load balancing, decentralised data 
+management etc.
+- Testing for monolithic is simpler than for microservices
+- shared memory access means better performance
+- But it also has drawbacks
+- Because the entire appplication is built on a single system, it's 
+difficult to isolate services for upgrades and independent scaling as 
+the application evolves and demands change
+- becomes increasingly difficult to understand as the application grows 
+and the number of layers and depenencies increase
+- Hard to distribute development because of tightly integrated 
+parts/services - makes distributed team effort difficult
+- Heavy apps can slow down start up time (becausw they have to be run 
+all at once)
+- Each update results in redeploying the full stack app
+
+### Microservices
+- The idea is to split your application into a set of smaller, 
+inter-connected services that are:
+	- Highly maintainable and testable
+	- Loosely coupled
+	- Independently deployable
+	- Organised around business capabilities
+	- Owned by small teams
+- some advantages:
+- Decoupled: each unit can be upgraded without requiring a complete 
+overhaul of the application
+- Easier onboarding of new developers: only need to master microservice 
+they'll be working on
+- Scalability: each microservice can be scaled independently, while also 
+adding new components
+- Improved fault isolation: as modules work independently from each 
+other, a failure in one module doesn't affect the others, and is easier 
+to isolate as only the module in question needs to inspected
+- smaller and faster deployments because each service can be scaled and 
+deployed independently of the others, instead of having to deploy and 
+scale the entire app at once
